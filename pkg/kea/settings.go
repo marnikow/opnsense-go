@@ -54,6 +54,21 @@ type DHCPv6Settings struct {
 	ThisHostname string        `json:"this_hostname"`
 }
 
+type DdnsGeneral struct {
+	Enabled      string `json:"enabled"`
+	ManualConfig string `json:"manual_config"`
+	ServerIp     string `json:"server_ip"`
+	ServerPort   string `json:"server_port"`
+}
+
+type DdnsMonad struct {
+	Ddns DdnsSettings `json:"ddns"`
+}
+
+type DdnsSettings struct {
+	General DdnsGeneral `json:"general"`
+}
+
 type HA struct {
 	Enabled           string `json:"enabled"`
 	ThisServerName    string `json:"this_server_name"`
@@ -165,6 +180,54 @@ func (c *Controller) SettingsDHCPv6Update(ctx context.Context, dhcpv6 *DHCPv6Set
 	result, err := api.Call(c.Client(), ctx, callOpts, resultData)
 	if err != nil {
 		return nil, fmt.Errorf("DHCPv6Update call failed: %w", err)
+	}
+	return result, nil
+}
+
+// SettingsDdnsGet executes the DdnsGet RPC call of the Settings controller
+func (c *Controller) SettingsDdnsGet(ctx context.Context) (*DdnsMonad, error) {
+
+	callParams := []string{}
+	queryParams := make(map[string]string)
+	bodyParams := make(map[string]interface{})
+
+	callOpts := api.RPCOpts{
+		BaseEndpoint:    "/kea/ddns/get",
+		Method:          "GET",
+		PathParameters:  callParams,
+		QueryParameters: queryParams,
+		BodyParameters:  bodyParams,
+	}
+
+	resultData := &DdnsMonad{}
+	result, err := api.Call(c.Client(), ctx, callOpts, resultData)
+	if err != nil {
+		return nil, fmt.Errorf("DdnsGet call failed: %w", err)
+	}
+	return result, nil
+}
+
+// SettingsDdnsUpdate executes the DdnsUpdate RPC call of the Settings controller
+func (c *Controller) SettingsDdnsUpdate(ctx context.Context, ddns *DdnsSettings) (*Result, error) {
+
+	callParams := []string{}
+	queryParams := make(map[string]string)
+	bodyParams := make(map[string]interface{})
+
+	bodyParams["ddns"] = ddns
+
+	callOpts := api.RPCOpts{
+		BaseEndpoint:    "/kea/ddns/set",
+		Method:          "POST",
+		PathParameters:  callParams,
+		QueryParameters: queryParams,
+		BodyParameters:  bodyParams,
+	}
+
+	resultData := &Result{}
+	result, err := api.Call(c.Client(), ctx, callOpts, resultData)
+	if err != nil {
+		return nil, fmt.Errorf("DdnsUpdate call failed: %w", err)
 	}
 	return result, nil
 }
