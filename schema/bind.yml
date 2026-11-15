@@ -37,12 +37,27 @@ resources:
       - name: Enabled
         type: string
         key: enabled
+      - name: Type
+        type: SelectedMap
+        key: type
       - name: AllowTransfer
         type: SelectedMapList
         key: allowtransfer
       - name: AllowQuery
         type: SelectedMapList
         key: allowquery
+      - name: AllowRndcTransfer
+        type: string
+        key: allowrndctransfer
+      - name: AllowRndcUpdate
+        type: string
+        key: allowrndcupdate
+      - name: AllowNotifySecondary
+        type: SelectedMapList
+        key: allownotifysecondary
+      - name: Serial
+        type: string
+        key: serial
       - name: TimeToLive
         type: string
         key: ttl
