@@ -104,3 +104,127 @@ resources:
       - name: Value
         type: string
         key: value
+
+rpc:
+  # Global settings (os-bind model OPNsense/Bind/General).
+  - name: "General"
+    filename: general
+    customTypes:
+      GeneralMonad:
+        - name: General
+          type: GeneralSettings
+          key: general
+      GeneralSettings:
+        - name: Enabled
+          type: string
+          key: enabled
+        - name: DisableV6
+          type: string
+          key: disablev6
+        - name: EnableRpz
+          type: string
+          key: enablerpz
+        - name: ListenV4
+          type: SelectedMapList
+          key: listenv4
+        - name: ListenV6
+          type: SelectedMapList
+          key: listenv6
+        - name: QuerySource
+          type: string
+          key: querysource
+        - name: QuerySourceV6
+          type: string
+          key: querysourcev6
+        - name: TransferSource
+          type: string
+          key: transfersource
+        - name: TransferSourceV6
+          type: string
+          key: transfersourcev6
+        - name: Port
+          type: string
+          key: port
+        - name: Forwarders
+          type: SelectedMapList
+          key: forwarders
+        - name: FilterAaaaV4
+          type: string
+          key: filteraaaav4
+        - name: FilterAaaaV6
+          type: string
+          key: filteraaaav6
+        - name: FilterAaaaAcl
+          type: SelectedMapList
+          key: filteraaaaacl
+        - name: LogSize
+          type: string
+          key: logsize
+        - name: GeneralLogLevel
+          type: SelectedMap
+          key: general_log_level
+        - name: MaxCacheSize
+          type: string
+          key: maxcachesize
+        - name: Recursion
+          type: SelectedMapList
+          key: recursion
+        - name: AllowTransfer
+          type: SelectedMapList
+          key: allowtransfer
+        - name: AllowQuery
+          type: SelectedMapList
+          key: allowquery
+        - name: DnssecValidation
+          type: SelectedMap
+          key: dnssecvalidation
+        - name: HideHostname
+          type: string
+          key: hidehostname
+        - name: HideVersion
+          type: string
+          key: hideversion
+        - name: DisablePrefetch
+          type: string
+          key: disableprefetch
+        - name: EnableRateLimiting
+          type: string
+          key: enableratelimiting
+        - name: RateLimitCount
+          type: string
+          key: ratelimitcount
+        - name: RateLimitExcept
+          type: SelectedMapList
+          key: ratelimitexcept
+        - name: RndcAlgo
+          type: SelectedMap
+          key: rndcalgo
+        - name: RndcSecret
+          type: string
+          key: rndcsecret
+      GeneralResult:
+        - name: Result
+          type: string
+          key: result
+      GeneralActionResult:
+        - name: Status
+          type: string
+          key: status
+    rpc_calls:
+      - name: "Get"
+        method: "GET"
+        endpoint: "/bind/general/get"
+        result_type: "GeneralMonad"
+      - name: "Update"
+        method: "POST"
+        endpoint: "/bind/general/set"
+        params:
+          - name: "general"
+            optional: false
+            bodyParameter: true
+            customType: "GeneralSettings"
+        result_type: "GeneralResult"
+      - name: "Reconfigure"
+        method: "POST"
+        endpoint: "/bind/service/reconfigure"
+        result_type: "GeneralActionResult"
