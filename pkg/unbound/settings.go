@@ -25,6 +25,7 @@ type Advanced struct {
 	Prefetch                  string              `json:"prefetch"`
 	PrefetchKey               string              `json:"prefetchkey"`
 	DNSSECStripped            string              `json:"dnssecstripped"`
+	BelowNxDomain             string              `json:"belownxdomain"`
 	AggressiveNSEC            string              `json:"aggressivensec"`
 	ServeExpired              string              `json:"serveexpired"`
 	ServeExpiredReplyTTL      string              `json:"serveexpiredreplyttl"`
@@ -80,6 +81,7 @@ type General struct {
 	Enabled           string              `json:"enabled"`
 	Port              string              `json:"port"`
 	Stats             string              `json:"stats"`
+	SafeSearch        string              `json:"safesearch"`
 	ActiveInterface   api.SelectedMapList `json:"active_interface"`
 	DNSSEC            string              `json:"dnssec"`
 	DNS64             string              `json:"dns64"`

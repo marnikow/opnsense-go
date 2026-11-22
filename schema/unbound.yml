@@ -204,6 +204,10 @@ rpc:
         - name: Stats
           type: string
           key: stats
+        # 26.7 moved safesearch from dnsbl to general.
+        - name: SafeSearch
+          type: string
+          key: safesearch
         - name: ActiveInterface
           type: SelectedMapList
           key: active_interface
@@ -265,6 +269,9 @@ rpc:
         - name: DNSSECStripped
           type: string
           key: dnssecstripped
+        - name: BelowNxDomain
+          type: string
+          key: belownxdomain
         - name: AggressiveNSEC
           type: string
           key: aggressivensec
