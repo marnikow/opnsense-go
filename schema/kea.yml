@@ -29,6 +29,9 @@ resources:
       - name: OptionData
         type: OptionDataV4
         key: option_data
+      - name: Option
+        type: SelectedMapList
+        key: option
       - name: DdnsForwardZone
         type: string
         key: ddns_forward_zone
@@ -139,6 +142,42 @@ resources:
       - name: Role
         type: SelectedMap
         key: role
+
+  # Custom DHCPv4 options (KeaDhcpv4.xml options.option), referenced by
+  # SubnetV4.Option and ReservationV4 by UUID.
+  - name: OptionV4
+    filename: optionv4
+    monad: option
+    endpoints:
+      add: "/kea/dhcpv4/add_option"
+      get: "/kea/dhcpv4/get_option"
+      update: "/kea/dhcpv4/set_option"
+      delete: "/kea/dhcpv4/del_option"
+    attrs:
+      - name: Code
+        type: SelectedMap
+        key: code
+      - name: Encoding
+        type: SelectedMap
+        key: encoding
+      - name: Data
+        type: string
+        key: data
+      - name: Force
+        type: string
+        key: force
+      - name: MatchCode
+        type: SelectedMap
+        key: match_code
+      - name: MatchEncoding
+        type: SelectedMap
+        key: match_encoding
+      - name: MatchData
+        type: string
+        key: match_data
+      - name: Description
+        type: string
+        key: description
 
   - name: SubnetV6
     filename: subnetv6
