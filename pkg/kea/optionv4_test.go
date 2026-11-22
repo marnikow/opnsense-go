@@ -69,6 +69,20 @@ func TestOptionV4(t *testing.T) {
 		t.Fatalf("SubnetV4 option reference does not match: got %v, want [%s]", gotSubnet.Option, key)
 	}
 
+	// Allocator and ping check round-trip on the same subnet.
+	subnet.Allocator = "random"
+	subnet.PingCheck = "1"
+	if err := controller.UpdateSubnetV4(ctx, subnetKey, subnet); err != nil {
+		t.Fatalf("Failed to update SubnetV4: %v", err)
+	}
+	gotSubnet, err = controller.GetSubnetV4(ctx, subnetKey)
+	if err != nil {
+		t.Fatalf("Failed to get updated SubnetV4: %v", err)
+	}
+	if gotSubnet.Allocator != "random" || gotSubnet.PingCheck != "1" {
+		t.Fatalf("SubnetV4 allocator/ping_check not updated: %+v", gotSubnet)
+	}
+
 	// Match condition: only send when the client sends vendor class 60.
 	option.MatchCode = "60"
 	option.MatchEncoding = "string"

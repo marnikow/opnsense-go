@@ -39,6 +39,8 @@ type SubnetV4 struct {
 	OptionDataAutoCollect      string              `json:"option_data_autocollect"`
 	OptionData                 OptionDataV4        `json:"option_data"`
 	Option                     api.SelectedMapList `json:"option"`
+	Allocator                  api.SelectedMap     `json:"allocator"`
+	PingCheck                  string              `json:"ping_check"`
 	DdnsForwardZone            string              `json:"ddns_forward_zone"`
 	DdnsReverseZone            string              `json:"ddns_reverse_zone"`
 	DdnsQualifyingSuffix       string              `json:"ddns_qualifying_suffix"`
