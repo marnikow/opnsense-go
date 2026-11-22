@@ -154,6 +154,9 @@ resources:
       - name: Hostname
         type: string
         key: hostname
+      - name: Option
+        type: SelectedMapList
+        key: option
       - name: Description
         type: string
         key: description
@@ -364,6 +367,9 @@ resources:
       - name: DomainSearch
         type: SelectedMapList
         key: domain_search
+      - name: Option
+        type: SelectedMapList
+        key: option
       - name: Description
         type: string
         key: description

@@ -64,6 +64,31 @@ func TestOptionV6(t *testing.T) {
 		t.Fatalf("SubnetV6 option reference does not match: got %v, want [%s]", gotSubnet.Option, key)
 	}
 
+	// Reference the option from a reservation in that subnet.
+	reservation := &ReservationV6{
+		Subnet:      api.SelectedMap(subnetKey),
+		IpAddress:   "fd00:202::10",
+		DUID:        "00:01:00:01:2a:2b:2c:2d:aa:bb:cc:dd:ee:10",
+		Option:      api.SelectedMapList{key},
+		Description: "Test reservation for OptionV6",
+	}
+	reservationKey, err := controller.AddReservationV6(ctx, reservation)
+	if err != nil {
+		t.Fatalf("Failed to add ReservationV6 with option: %v", err)
+	}
+	defer func() {
+		if err := controller.DeleteReservationV6(ctx, reservationKey); err != nil {
+			t.Errorf("Failed to delete ReservationV6: %v", err)
+		}
+	}()
+	gotReservation, err := controller.GetReservationV6(ctx, reservationKey)
+	if err != nil {
+		t.Fatalf("Failed to get ReservationV6: %v", err)
+	}
+	if len(gotReservation.Option) != 1 || gotReservation.Option[0] != key {
+		t.Fatalf("ReservationV6 option reference does not match: got %v, want [%s]", gotReservation.Option, key)
+	}
+
 	option.Force = "1"
 	option.Description = "test option 23 updated"
 	if err := controller.UpdateOptionV6(ctx, key, option); err != nil {

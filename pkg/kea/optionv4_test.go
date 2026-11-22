@@ -69,6 +69,31 @@ func TestOptionV4(t *testing.T) {
 		t.Fatalf("SubnetV4 option reference does not match: got %v, want [%s]", gotSubnet.Option, key)
 	}
 
+	// Reference the option from a reservation in that subnet.
+	reservation := &ReservationV4{
+		Subnet:      api.SelectedMap(subnetKey),
+		IpAddress:   "192.168.202.10",
+		HwAddress:   "aa:bb:cc:dd:ee:10",
+		Option:      api.SelectedMapList{key},
+		Description: "Test reservation for OptionV4",
+	}
+	reservationKey, err := controller.AddReservationV4(ctx, reservation)
+	if err != nil {
+		t.Fatalf("Failed to add ReservationV4 with option: %v", err)
+	}
+	defer func() {
+		if err := controller.DeleteReservationV4(ctx, reservationKey); err != nil {
+			t.Errorf("Failed to delete ReservationV4: %v", err)
+		}
+	}()
+	gotReservation, err := controller.GetReservationV4(ctx, reservationKey)
+	if err != nil {
+		t.Fatalf("Failed to get ReservationV4: %v", err)
+	}
+	if len(gotReservation.Option) != 1 || gotReservation.Option[0] != key {
+		t.Fatalf("ReservationV4 option reference does not match: got %v, want [%s]", gotReservation.Option, key)
+	}
+
 	// Allocator and ping check round-trip on the same subnet.
 	subnet.Allocator = "random"
 	subnet.PingCheck = "1"

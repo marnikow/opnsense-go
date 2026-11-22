@@ -25,6 +25,7 @@ type ReservationV6 struct {
 	DUID         string              `json:"duid"`
 	Hostname     string              `json:"hostname"`
 	DomainSearch api.SelectedMapList `json:"domain_search"`
+	Option       api.SelectedMapList `json:"option"`
 	Description  string              `json:"description"`
 }
 

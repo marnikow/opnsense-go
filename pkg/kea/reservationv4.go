@@ -20,11 +20,12 @@ var ReservationV4Opts = api.ReqOpts{
 // Data structs
 
 type ReservationV4 struct {
-	Subnet      api.SelectedMap `json:"subnet"`
-	IpAddress   string          `json:"ip_address"`
-	HwAddress   string          `json:"hw_address"`
-	Hostname    string          `json:"hostname"`
-	Description string          `json:"description"`
+	Subnet      api.SelectedMap     `json:"subnet"`
+	IpAddress   string              `json:"ip_address"`
+	HwAddress   string              `json:"hw_address"`
+	Hostname    string              `json:"hostname"`
+	Option      api.SelectedMapList `json:"option"`
+	Description string              `json:"description"`
 }
 
 // CRUD operations
