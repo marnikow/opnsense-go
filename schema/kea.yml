@@ -212,6 +212,42 @@ resources:
         type: string
         key: description
 
+  # Custom DHCPv6 options (KeaDhcpv6.xml options.option), referenced by
+  # SubnetV6.Option by UUID.
+  - name: OptionV6
+    filename: optionv6
+    monad: option
+    endpoints:
+      add: "/kea/dhcpv6/add_option"
+      get: "/kea/dhcpv6/get_option"
+      update: "/kea/dhcpv6/set_option"
+      delete: "/kea/dhcpv6/del_option"
+    attrs:
+      - name: Code
+        type: SelectedMap
+        key: code
+      - name: Encoding
+        type: SelectedMap
+        key: encoding
+      - name: Data
+        type: string
+        key: data
+      - name: Force
+        type: string
+        key: force
+      - name: MatchCode
+        type: SelectedMap
+        key: match_code
+      - name: MatchEncoding
+        type: SelectedMap
+        key: match_encoding
+      - name: MatchData
+        type: string
+        key: match_data
+      - name: Description
+        type: string
+        key: description
+
   - name: SubnetV6
     filename: subnetv6
     monad: subnet6
