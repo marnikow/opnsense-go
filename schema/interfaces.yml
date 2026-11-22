@@ -329,6 +329,41 @@ resources:
         type: SelectedMap
         key: gatewayv6
 
+  # GRE devices (model OPNsense/Interfaces/Gre). local-addr is a volatile field that
+  # OPNsense splits into the if/ipaddr fields, so only local-addr is read and written.
+  # greif is assigned by OPNsense on add and cannot be changed.
+  - name: Gre
+    filename: gre
+    monad: gre
+    endpoints:
+      add: "/interfaces/gre_settings/addItem"
+      get: "/interfaces/gre_settings/getItem"
+      update: "/interfaces/gre_settings/setItem"
+      delete: "/interfaces/gre_settings/delItem"
+      reconfigure: "/interfaces/gre_settings/reconfigure"
+    attrs:
+      - name: LocalAddr
+        type: string
+        key: local-addr
+      - name: Device
+        type: string
+        key: greif
+      - name: RemoteAddr
+        type: string
+        key: remote-addr
+      - name: TunnelLocalAddr
+        type: string
+        key: tunnel-local-addr
+      - name: TunnelRemoteAddr
+        type: string
+        key: tunnel-remote-addr
+      - name: TunnelRemoteNet
+        type: string
+        key: tunnel-remote-net
+      - name: Description
+        type: string
+        key: descr
+
 rpc:
   - name: "Overview"
     filename: overview
