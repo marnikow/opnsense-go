@@ -218,6 +218,30 @@ resources:
       - name: Log
         type: string
         key: log
+      - name: NoSync
+        type: string
+        key: nosync
+      - name: Categories
+        type: SelectedMapList
+        key: categories
+      - name: PoolOptions
+        type: SelectedMap
+        key: poolopts
+      - name: PoolOptionsSourceHashKey
+        type: string
+        key: poolopts_sourcehashkey
+      - name: StaticNatPort
+        type: string
+        key: staticnatport
+      - name: EndpointIndependent
+        type: string
+        key: endpoint-independent
+      - name: SetLocalTag
+        type: string
+        key: tag
+      - name: MatchLocalTag
+        type: string
+        key: tagged
       - name: Description
         type: string
         key: description

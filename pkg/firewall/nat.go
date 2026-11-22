@@ -20,22 +20,30 @@ var NATOpts = api.ReqOpts{
 // Data structs
 
 type NAT struct {
-	Enabled           string          `json:"enabled"`
-	DisableNAT        string          `json:"nonat"`
-	Sequence          string          `json:"sequence"`
-	Interface         api.SelectedMap `json:"interface"`
-	IPProtocol        api.SelectedMap `json:"ipprotocol"`
-	Protocol          api.SelectedMap `json:"protocol"`
-	SourceNet         string          `json:"source_net"`
-	SourcePort        string          `json:"source_port"`
-	SourceInvert      string          `json:"source_not"`
-	DestinationNet    string          `json:"destination_net"`
-	DestinationPort   string          `json:"destination_port"`
-	DestinationInvert string          `json:"destination_not"`
-	Target            string          `json:"target"`
-	TargetPort        string          `json:"target_port"`
-	Log               string          `json:"log"`
-	Description       string          `json:"description"`
+	Enabled                  string              `json:"enabled"`
+	DisableNAT               string              `json:"nonat"`
+	Sequence                 string              `json:"sequence"`
+	Interface                api.SelectedMap     `json:"interface"`
+	IPProtocol               api.SelectedMap     `json:"ipprotocol"`
+	Protocol                 api.SelectedMap     `json:"protocol"`
+	SourceNet                string              `json:"source_net"`
+	SourcePort               string              `json:"source_port"`
+	SourceInvert             string              `json:"source_not"`
+	DestinationNet           string              `json:"destination_net"`
+	DestinationPort          string              `json:"destination_port"`
+	DestinationInvert        string              `json:"destination_not"`
+	Target                   string              `json:"target"`
+	TargetPort               string              `json:"target_port"`
+	Log                      string              `json:"log"`
+	NoSync                   string              `json:"nosync"`
+	Categories               api.SelectedMapList `json:"categories"`
+	PoolOptions              api.SelectedMap     `json:"poolopts"`
+	PoolOptionsSourceHashKey string              `json:"poolopts_sourcehashkey"`
+	StaticNatPort            string              `json:"staticnatport"`
+	EndpointIndependent      string              `json:"endpoint-independent"`
+	SetLocalTag              string              `json:"tag"`
+	MatchLocalTag            string              `json:"tagged"`
+	Description              string              `json:"description"`
 }
 
 // CRUD operations

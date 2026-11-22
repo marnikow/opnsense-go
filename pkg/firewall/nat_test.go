@@ -70,6 +70,9 @@ func TestNAT(t *testing.T) {
 
 	nat.Target = "192.168.1.200"
 	nat.TargetPort = "9090"
+	nat.StaticNatPort = "1"
+	nat.NoSync = "1"
+	nat.SetLocalTag = "test_tag"
 	nat.Description = "Test NAT rule updated"
 	err = controller.UpdateNAT(ctx, key, nat)
 	if err != nil {
@@ -83,6 +86,9 @@ func TestNAT(t *testing.T) {
 	}
 	if retrievedNAT.Target != "192.168.1.200" {
 		t.Fatalf("Retrieved NAT target does not match updated target: got %s, want %s", retrievedNAT.Target, "192.168.1.200")
+	}
+	if retrievedNAT.StaticNatPort != "1" || retrievedNAT.NoSync != "1" || retrievedNAT.SetLocalTag != "test_tag" {
+		t.Fatalf("Retrieved NAT flags do not match: %+v", retrievedNAT)
 	}
 	if retrievedNAT.TargetPort != "9090" {
 		t.Fatalf("Retrieved NAT target port does not match updated target port: got %s, want %s", retrievedNAT.TargetPort, "9090")
