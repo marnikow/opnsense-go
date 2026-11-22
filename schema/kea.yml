@@ -154,6 +154,15 @@ resources:
       - name: Hostname
         type: string
         key: hostname
+      - name: ClientId
+        type: string
+        key: client_id
+      - name: NextServer
+        type: string
+        key: next_server
+      - name: OptionData
+        type: OptionDataV4
+        key: option_data
       - name: Option
         type: SelectedMapList
         key: option
@@ -367,6 +376,12 @@ resources:
       - name: DomainSearch
         type: SelectedMapList
         key: domain_search
+      - name: Prefix
+        type: string
+        key: prefix
+      - name: HwAddress
+        type: string
+        key: hw_address
       - name: Option
         type: SelectedMapList
         key: option

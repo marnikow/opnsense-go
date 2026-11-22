@@ -70,6 +70,7 @@ func TestOptionV6(t *testing.T) {
 		IpAddress:   "fd00:202::10",
 		DUID:        "00:01:00:01:2a:2b:2c:2d:aa:bb:cc:dd:ee:10",
 		Option:      api.SelectedMapList{key},
+		HwAddress:   "aa:bb:cc:dd:ee:10",
 		Description: "Test reservation for OptionV6",
 	}
 	reservationKey, err := controller.AddReservationV6(ctx, reservation)
@@ -87,6 +88,9 @@ func TestOptionV6(t *testing.T) {
 	}
 	if len(gotReservation.Option) != 1 || gotReservation.Option[0] != key {
 		t.Fatalf("ReservationV6 option reference does not match: got %v, want [%s]", gotReservation.Option, key)
+	}
+	if gotReservation.HwAddress != "aa:bb:cc:dd:ee:10" {
+		t.Fatalf("ReservationV6 hw_address does not match: %+v", gotReservation)
 	}
 
 	option.Force = "1"

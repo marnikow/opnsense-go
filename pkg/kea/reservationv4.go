@@ -24,6 +24,9 @@ type ReservationV4 struct {
 	IpAddress   string              `json:"ip_address"`
 	HwAddress   string              `json:"hw_address"`
 	Hostname    string              `json:"hostname"`
+	ClientId    string              `json:"client_id"`
+	NextServer  string              `json:"next_server"`
+	OptionData  OptionDataV4        `json:"option_data"`
 	Option      api.SelectedMapList `json:"option"`
 	Description string              `json:"description"`
 }

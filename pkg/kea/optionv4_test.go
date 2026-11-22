@@ -71,10 +71,19 @@ func TestOptionV4(t *testing.T) {
 
 	// Reference the option from a reservation in that subnet.
 	reservation := &ReservationV4{
-		Subnet:      api.SelectedMap(subnetKey),
-		IpAddress:   "192.168.202.10",
-		HwAddress:   "aa:bb:cc:dd:ee:10",
-		Option:      api.SelectedMapList{key},
+		Subnet:     api.SelectedMap(subnetKey),
+		IpAddress:  "192.168.202.10",
+		HwAddress:  "aa:bb:cc:dd:ee:10",
+		Option:     api.SelectedMapList{key},
+		ClientId:   "01:aa:bb:cc:dd:ee:10",
+		NextServer: "192.168.202.1",
+		OptionData: OptionDataV4{
+			DomainNameServers: api.SelectedMapList{"192.168.202.53"},
+			Routers:           api.SelectedMapList{},
+			NtpServers:        api.SelectedMapList{},
+			TimeServers:       api.SelectedMapList{},
+			DomainSearch:      api.SelectedMapList{},
+		},
 		Description: "Test reservation for OptionV4",
 	}
 	reservationKey, err := controller.AddReservationV4(ctx, reservation)
@@ -92,6 +101,10 @@ func TestOptionV4(t *testing.T) {
 	}
 	if len(gotReservation.Option) != 1 || gotReservation.Option[0] != key {
 		t.Fatalf("ReservationV4 option reference does not match: got %v, want [%s]", gotReservation.Option, key)
+	}
+	if gotReservation.ClientId != "01:aa:bb:cc:dd:ee:10" || gotReservation.NextServer != "192.168.202.1" ||
+		len(gotReservation.OptionData.DomainNameServers) != 1 {
+		t.Fatalf("ReservationV4 client ID/next server/option data do not match: %+v", gotReservation)
 	}
 
 	// Allocator and ping check round-trip on the same subnet.
