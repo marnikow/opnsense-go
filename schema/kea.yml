@@ -74,6 +74,24 @@ resources:
       - name: DdnsConflictResolutionMode
         type: SelectedMap
         key: ddns_conflict_resolution_mode
+      - name: Interface
+        type: SelectedMap
+        key: interface
+      - name: MatchCode
+        type: SelectedMap
+        key: match_code
+      - name: MatchEncoding
+        type: SelectedMap
+        key: match_encoding
+      - name: MatchData
+        type: string
+        key: match_data
+      - name: SubnetId
+        type: string
+        key: subnet_id
+      - name: ValidLifetime
+        type: string
+        key: valid_lifetime
       - name: Description
         type: string
         key: description
@@ -106,6 +124,15 @@ resources:
         - name: BootFileName
           type: string
           key: boot_file_name
+        - name: ClasslessStaticRoute
+          type: string
+          key: classless_static_route
+        - name: V6OnlyPreferred
+          type: string
+          key: v6_only_preferred
+        - name: V4Dnr
+          type: string
+          key: v4_dnr
   - name: ReservationV4
     filename: reservationv4
     monad: reservation
@@ -218,6 +245,51 @@ resources:
       - name: OptionDataAutoCollect
         type: string
         key: option_data_autocollect
+      - name: SubnetId
+        type: string
+        key: subnet_id
+      - name: ValidLifetime
+        type: string
+        key: valid_lifetime
+      - name: Option
+        type: SelectedMapList
+        key: option
+      - name: DdnsForwardZone
+        type: string
+        key: ddns_forward_zone
+      - name: DdnsReverseZone
+        type: string
+        key: ddns_reverse_zone
+      - name: DdnsQualifyingSuffix
+        type: string
+        key: ddns_qualifying_suffix
+      - name: DdnsDnsServer
+        type: string
+        key: ddns_dns_server
+      - name: DdnsDnsPort
+        type: string
+        key: ddns_dns_port
+      - name: DdnsDomainKeyName
+        type: string
+        key: ddns_domain_key_name
+      - name: DdnsDomainKeySecret
+        type: string
+        key: ddns_domain_key_secret
+      - name: DdnsDomainKeyAlgorithm
+        type: SelectedMap
+        key: ddns_domain_key_algorithm
+      - name: DdnsOverrideNoUpdate
+        type: string
+        key: ddns_override_no_update
+      - name: DdnsOverrideClientUpdate
+        type: string
+        key: ddns_override_client_update
+      - name: DdnsUpdateOnRenew
+        type: string
+        key: ddns_update_on_renew
+      - name: DdnsConflictResolutionMode
+        type: SelectedMap
+        key: ddns_conflict_resolution_mode
       - name: Description
         type: string
         key: description
@@ -229,6 +301,9 @@ resources:
         - name: DomainSearch
           type: SelectedMapList
           key: domain_search
+        - name: V6Dnr
+          type: string
+          key: v6_dnr
   - name: ReservationV6
     filename: reservationv6
     monad: reservation

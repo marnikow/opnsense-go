@@ -7,8 +7,8 @@ import (
 	"github.com/browningluke/opnsense-go/pkg/api"
 )
 
-// TestSubnetV6AutoCollect round-trips option_data_autocollect and
-// dynamic_prefix. A dynamic prefix subnet needs an interface with an
+// TestSubnetV6AutoCollect round-trips option_data_autocollect, dynamic_prefix,
+// valid_lifetime and the ddns fields. A dynamic prefix subnet needs an interface with an
 // identity association prefix, which the CI VM does not have, so only the
 // static case (dynamic_prefix = 0) is created here.
 func TestSubnetV6AutoCollect(t *testing.T) {
@@ -39,5 +39,21 @@ func TestSubnetV6AutoCollect(t *testing.T) {
 	}
 	if got.OptionDataAutoCollect != "1" || got.DynamicPrefix != "0" {
 		t.Fatalf("Retrieved SubnetV6 does not match: %+v", got)
+	}
+
+	// Lifetime and dynamic DNS fields.
+	subnet.ValidLifetime = "3600"
+	subnet.DdnsForwardZone = "v6.example.com."
+	subnet.DdnsDnsServer = "127.0.0.1"
+	subnet.DdnsUpdateOnRenew = "1"
+	if err := controller.UpdateSubnetV6(ctx, key, subnet); err != nil {
+		t.Fatalf("Failed to update SubnetV6: %v", err)
+	}
+	got, err = controller.GetSubnetV6(ctx, key)
+	if err != nil {
+		t.Fatalf("Failed to get updated SubnetV6: %v", err)
+	}
+	if got.ValidLifetime != "3600" || got.DdnsForwardZone != "v6.example.com." || got.DdnsUpdateOnRenew != "1" || got.SubnetId == "" {
+		t.Fatalf("SubnetV6 lifetime/ddns not updated: %+v", got)
 	}
 }

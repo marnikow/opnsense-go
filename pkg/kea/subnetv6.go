@@ -22,18 +22,34 @@ var SubnetV6Opts = api.ReqOpts{
 type OptionDataV6 struct {
 	DomainNameServers api.SelectedMapList `json:"dns_servers"`
 	DomainSearch      api.SelectedMapList `json:"domain_search"`
+	V6Dnr             string              `json:"v6_dnr"`
 }
 
 type SubnetV6 struct {
-	Subnet                string          `json:"subnet"`
-	Allocator             api.SelectedMap `json:"allocator"`
-	PDAllocator           api.SelectedMap `json:"pd-allocator"`
-	Pools                 string          `json:"pools"`
-	Interface             api.SelectedMap `json:"interface"`
-	OptionData            OptionDataV6    `json:"option_data"`
-	DynamicPrefix         string          `json:"dynamic_prefix"`
-	OptionDataAutoCollect string          `json:"option_data_autocollect"`
-	Description           string          `json:"description"`
+	Subnet                     string              `json:"subnet"`
+	Allocator                  api.SelectedMap     `json:"allocator"`
+	PDAllocator                api.SelectedMap     `json:"pd-allocator"`
+	Pools                      string              `json:"pools"`
+	Interface                  api.SelectedMap     `json:"interface"`
+	OptionData                 OptionDataV6        `json:"option_data"`
+	DynamicPrefix              string              `json:"dynamic_prefix"`
+	OptionDataAutoCollect      string              `json:"option_data_autocollect"`
+	SubnetId                   string              `json:"subnet_id"`
+	ValidLifetime              string              `json:"valid_lifetime"`
+	Option                     api.SelectedMapList `json:"option"`
+	DdnsForwardZone            string              `json:"ddns_forward_zone"`
+	DdnsReverseZone            string              `json:"ddns_reverse_zone"`
+	DdnsQualifyingSuffix       string              `json:"ddns_qualifying_suffix"`
+	DdnsDnsServer              string              `json:"ddns_dns_server"`
+	DdnsDnsPort                string              `json:"ddns_dns_port"`
+	DdnsDomainKeyName          string              `json:"ddns_domain_key_name"`
+	DdnsDomainKeySecret        string              `json:"ddns_domain_key_secret"`
+	DdnsDomainKeyAlgorithm     api.SelectedMap     `json:"ddns_domain_key_algorithm"`
+	DdnsOverrideNoUpdate       string              `json:"ddns_override_no_update"`
+	DdnsOverrideClientUpdate   string              `json:"ddns_override_client_update"`
+	DdnsUpdateOnRenew          string              `json:"ddns_update_on_renew"`
+	DdnsConflictResolutionMode api.SelectedMap     `json:"ddns_conflict_resolution_mode"`
+	Description                string              `json:"description"`
 }
 
 // CRUD operations

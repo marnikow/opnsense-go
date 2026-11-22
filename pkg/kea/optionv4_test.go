@@ -83,6 +83,25 @@ func TestOptionV4(t *testing.T) {
 		t.Fatalf("SubnetV4 allocator/ping_check not updated: %+v", gotSubnet)
 	}
 
+	// Lifetime, client class match and the newer option data fields.
+	subnet.ValidLifetime = "7200"
+	subnet.MatchCode = "60"
+	subnet.MatchEncoding = "string"
+	subnet.MatchData = "ubnt"
+	subnet.OptionData.ClasslessStaticRoute = "10.10.0.0/16 - 192.168.202.1"
+	subnet.OptionData.V6OnlyPreferred = "300"
+	if err := controller.UpdateSubnetV4(ctx, subnetKey, subnet); err != nil {
+		t.Fatalf("Failed to update SubnetV4 (lifetime/match): %v", err)
+	}
+	gotSubnet, err = controller.GetSubnetV4(ctx, subnetKey)
+	if err != nil {
+		t.Fatalf("Failed to get updated SubnetV4: %v", err)
+	}
+	if gotSubnet.ValidLifetime != "7200" || gotSubnet.MatchCode != "60" || gotSubnet.MatchData != "ubnt" ||
+		gotSubnet.OptionData.ClasslessStaticRoute == "" || gotSubnet.OptionData.V6OnlyPreferred != "300" || gotSubnet.SubnetId == "" {
+		t.Fatalf("SubnetV4 lifetime/match/option data not updated: %+v", gotSubnet)
+	}
+
 	// Match condition: only send when the client sends vendor class 60.
 	option.MatchCode = "60"
 	option.MatchEncoding = "string"

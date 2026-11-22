@@ -20,15 +20,18 @@ var SubnetV4Opts = api.ReqOpts{
 // Data structs
 
 type OptionDataV4 struct {
-	DomainNameServers api.SelectedMapList `json:"domain_name_servers"`
-	DomainSearch      api.SelectedMapList `json:"domain_search"`
-	Routers           api.SelectedMapList `json:"routers"`
-	StaticRoutes      string              `json:"static_routes"`
-	DomainName        string              `json:"domain_name"`
-	NtpServers        api.SelectedMapList `json:"ntp_servers"`
-	TimeServers       api.SelectedMapList `json:"time_servers"`
-	TftpServerName    string              `json:"tftp_server_name"`
-	BootFileName      string              `json:"boot_file_name"`
+	DomainNameServers    api.SelectedMapList `json:"domain_name_servers"`
+	DomainSearch         api.SelectedMapList `json:"domain_search"`
+	Routers              api.SelectedMapList `json:"routers"`
+	StaticRoutes         string              `json:"static_routes"`
+	DomainName           string              `json:"domain_name"`
+	NtpServers           api.SelectedMapList `json:"ntp_servers"`
+	TimeServers          api.SelectedMapList `json:"time_servers"`
+	TftpServerName       string              `json:"tftp_server_name"`
+	BootFileName         string              `json:"boot_file_name"`
+	ClasslessStaticRoute string              `json:"classless_static_route"`
+	V6OnlyPreferred      string              `json:"v6_only_preferred"`
+	V4Dnr                string              `json:"v4_dnr"`
 }
 
 type SubnetV4 struct {
@@ -53,6 +56,12 @@ type SubnetV4 struct {
 	DdnsOverrideClientUpdate   string              `json:"ddns_override_client_update"`
 	DdnsUpdateOnRenew          string              `json:"ddns_update_on_renew"`
 	DdnsConflictResolutionMode api.SelectedMap     `json:"ddns_conflict_resolution_mode"`
+	Interface                  api.SelectedMap     `json:"interface"`
+	MatchCode                  api.SelectedMap     `json:"match_code"`
+	MatchEncoding              api.SelectedMap     `json:"match_encoding"`
+	MatchData                  string              `json:"match_data"`
+	SubnetId                   string              `json:"subnet_id"`
+	ValidLifetime              string              `json:"valid_lifetime"`
 	Description                string              `json:"description"`
 }
 
