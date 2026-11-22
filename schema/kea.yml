@@ -212,6 +212,12 @@ resources:
       - name: OptionData
         type: OptionDataV6
         key: option_data
+      - name: DynamicPrefix
+        type: string
+        key: dynamic_prefix
+      - name: OptionDataAutoCollect
+        type: string
+        key: option_data_autocollect
       - name: Description
         type: string
         key: description
