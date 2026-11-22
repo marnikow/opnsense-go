@@ -1207,3 +1207,67 @@ rpc:
         method: "GET"
         endpoint: "/interfaces/overview/interfaces_info"
         result_type: "InterfacesInfoResponse"
+
+  # Global interface settings (model OPNsense/Interfaces/Settings, Interfaces > Settings).
+  # Reconfigure runs pluginctl -c networking_reload.
+  - name: "Settings"
+    filename: settings
+    customTypes:
+      SettingsMonad:
+        - name: Settings
+          type: GlobalSettings
+          key: settings
+      GlobalSettings:
+        - name: DisableChecksumOffloading
+          type: string
+          key: disablechecksumoffloading
+        - name: DisableSegmentationOffloading
+          type: string
+          key: disablesegmentationoffloading
+        - name: DisableLargeReceiveOffloading
+          type: string
+          key: disablelargereceiveoffloading
+        - name: DisableVlanHwFilter
+          type: SelectedMap
+          key: disablevlanhwfilter
+        - name: DisableIpv6
+          type: string
+          key: disableipv6
+        - name: Dhcp6NoRelease
+          type: string
+          key: dhcp6_norelease
+        - name: Dhcp6Debug
+          type: string
+          key: dhcp6_debug
+        - name: Dhcp6Duid
+          type: string
+          key: dhcp6_duid
+        - name: Dhcp6RaTimeout
+          type: string
+          key: dhcp6_ratimeout
+      SettingsResult:
+        - name: Result
+          type: string
+          key: result
+      SettingsActionResult:
+        - name: Status
+          type: string
+          key: status
+    rpc_calls:
+      - name: "Get"
+        method: "GET"
+        endpoint: "/interfaces/settings/get"
+        result_type: "SettingsMonad"
+      - name: "Update"
+        method: "POST"
+        endpoint: "/interfaces/settings/set"
+        params:
+          - name: "settings"
+            optional: false
+            bodyParameter: true
+            customType: "GlobalSettings"
+        result_type: "SettingsResult"
+      - name: "Reconfigure"
+        method: "POST"
+        endpoint: "/interfaces/settings/reconfigure"
+        result_type: "SettingsActionResult"
