@@ -364,3 +364,48 @@ resources:
       - name: Description
         type: string
         key: descr
+
+rpc:
+  # Source NAT mode (Firewall > NAT > Source NAT; model Firewall/Filter
+  # general.snat_mode, persisted to the legacy nat/outbound/mode node).
+  - name: "SourceNat"
+    filename: source_nat
+    customTypes:
+      SourceNatMonad:
+        - name: Filter
+          type: SourceNatFilter
+          key: filter
+      SourceNatFilter:
+        - name: General
+          type: SourceNatGeneral
+          key: general
+      SourceNatGeneral:
+        - name: SnatMode
+          type: SelectedMap
+          key: snat_mode
+      SourceNatResult:
+        - name: Result
+          type: string
+          key: result
+      SourceNatActionResult:
+        - name: Status
+          type: string
+          key: status
+    rpc_calls:
+      - name: "Get"
+        method: "GET"
+        endpoint: "/firewall/source_nat/get"
+        result_type: "SourceNatMonad"
+      - name: "Update"
+        method: "POST"
+        endpoint: "/firewall/source_nat/set"
+        params:
+          - name: "filter"
+            optional: false
+            bodyParameter: true
+            customType: "SourceNatFilter"
+        result_type: "SourceNatResult"
+      - name: "Apply"
+        method: "POST"
+        endpoint: "/firewall/source_nat/apply"
+        result_type: "SourceNatActionResult"
