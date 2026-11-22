@@ -157,6 +157,178 @@ resources:
         type: string
         key: descr
 
+  # Interface assignments (model OPNsense/Interfaces/NetworkInterface). Keyed by the
+  # interface identifier (wan, lan, optN) instead of a UUID; add returns the new identifier.
+  - name: Assignment
+    filename: assignment
+    monad: interface
+    endpoints:
+      add: "/interfaces/assignment/addItem"
+      get: "/interfaces/assignment/getItem"
+      update: "/interfaces/assignment/setItem"
+      delete: "/interfaces/assignment/delItem"
+      reconfigure: "/interfaces/assignment/reconfigure"
+    attrs:
+      - name: Device
+        type: SelectedMap
+        key: if
+      - name: Description
+        type: string
+        key: descr
+      - name: Lock
+        type: string
+        key: lock
+      - name: Enable
+        type: string
+        key: enable
+      - name: BlockPrivate
+        type: string
+        key: blockpriv
+      - name: BlockBogons
+        type: string
+        key: blockbogons
+      - name: SpoofMac
+        type: string
+        key: spoofmac
+      - name: Promiscuous
+        type: string
+        key: promisc
+      - name: Media
+        type: SelectedMap
+        key: media
+      - name: HwSettingsOverwrite
+        type: string
+        key: hw_settings_overwrite
+      - name: DisableChecksumOffloading
+        type: string
+        key: disablechecksumoffloading
+      - name: DisableSegmentationOffloading
+        type: string
+        key: disablesegmentationoffloading
+      - name: DisableLargeReceiveOffloading
+        type: string
+        key: disablelargereceiveoffloading
+      - name: DisableVlanHwFilter
+        type: SelectedMap
+        key: disablevlanhwfilter
+      - name: GatewayInterface
+        type: string
+        key: gateway_interface
+      - name: Mtu
+        type: string
+        key: mtu
+      - name: Mss
+        type: string
+        key: mss
+      - name: Type4
+        type: SelectedMap
+        key: type4
+      - name: Type6
+        type: SelectedMap
+        key: type6
+      - name: IpAddr
+        type: string
+        key: ipaddr
+      - name: IpAddrV6
+        type: string
+        key: ipaddrv6
+      - name: AliasAddress
+        type: string
+        key: alias-address
+      - name: AliasSubnet
+        type: string
+        key: alias-subnet
+      - name: DhcpRejectFrom
+        type: SelectedMapList
+        key: dhcprejectfrom
+      - name: DhcpHostname
+        type: string
+        key: dhcphostname
+      - name: DhcpHonourMtu
+        type: string
+        key: dhcphonourmtu
+      - name: DhcpVlanPrio
+        type: SelectedMap
+        key: dhcpvlanprio
+      - name: DhcpSendOptions
+        type: string
+        key: dhcp_send_options
+      - name: DhcpRequestOptions
+        type: string
+        key: dhcp_request_options
+      - name: Dhcp6VlanPrio
+        type: SelectedMap
+        key: dhcp6vlanprio
+      - name: Dhcp6IaPdLen
+        type: SelectedMap
+        key: dhcp6-ia-pd-len
+      - name: Dhcp6PrefixOnly
+        type: string
+        key: dhcp6prefixonly
+      - name: Dhcp6RequestDns
+        type: string
+        key: dhcp6_request_dns
+      - name: Dhcp6InformationOnly
+        type: string
+        key: dhcp6-information-only
+      - name: Dhcp6IaPdSendHint
+        type: string
+        key: dhcp6-ia-pd-send-hint
+      - name: Dhcp6RapidCommit
+        type: string
+        key: dhcp6_rapid_commit
+      - name: Dhcp6PrefixId
+        type: string
+        key: dhcp6-prefix-id
+      - name: Dhcp6Ifid
+        type: string
+        key: dhcp6_ifid
+      - name: Dhcp6AssocPd
+        type: string
+        key: dhcp6_assoc_pd
+      - name: Dhcp6SendOptions
+        type: string
+        key: dhcp6_send_options
+      - name: Dhcp6RequestOptions
+        type: string
+        key: dhcp6_request_options
+      - name: Prefix6rd
+        type: string
+        key: prefix-6rd
+      - name: Gateway6rd
+        type: string
+        key: gateway-6rd
+      - name: Prefix6rdV4Plen
+        type: string
+        key: prefix-6rd-v4plen
+      - name: Prefix6rdV4Addr
+        type: string
+        key: prefix-6rd-v4addr
+      - name: Track6Interface
+        type: SelectedMap
+        key: track6-interface
+      - name: Track6PrefixId
+        type: string
+        key: track6-prefix-id
+      - name: Track6Ifid
+        type: string
+        key: track6_ifid
+      - name: Track6PrefixRange
+        type: string
+        key: track6_prefix_range
+      - name: Track6AssocPd
+        type: string
+        key: track6_assoc_pd
+      - name: Dhcpd6Track6AllowOverride
+        type: string
+        key: dhcpd6track6allowoverride
+      - name: Gateway
+        type: SelectedMap
+        key: gateway
+      - name: GatewayV6
+        type: SelectedMap
+        key: gatewayv6
+
 rpc:
   - name: "Overview"
     filename: overview
