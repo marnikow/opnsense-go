@@ -18,7 +18,7 @@ resources:
         type: SelectedMap
         key: transport
       - name: Level
-        type: SelectedMap
+        type: SelectedMapList
         key: level
       - name: Facility
         type: SelectedMapList
@@ -38,6 +38,63 @@ resources:
       - name: Rfc5424
         type: string
         key: rfc5424
+      - name: Suppress
+        type: string
+        key: suppress
       - name: Description
         type: string
         key: description
+
+rpc:
+  # General settings (model Syslog general: enabled, loglocal, maxpreserve,
+  # maxfilesize). get also returns the destinations, which are ignored here.
+  - name: "Settings"
+    filename: settings
+    customTypes:
+      SettingsMonad:
+        - name: Syslog
+          type: Settings
+          key: syslog
+      Settings:
+        - name: General
+          type: General
+          key: general
+      General:
+        - name: Enabled
+          type: string
+          key: enabled
+        - name: LogLocal
+          type: string
+          key: loglocal
+        - name: MaxPreserve
+          type: string
+          key: maxpreserve
+        - name: MaxFileSize
+          type: string
+          key: maxfilesize
+      SettingsResult:
+        - name: Result
+          type: string
+          key: result
+      SettingsActionResult:
+        - name: Status
+          type: string
+          key: status
+    rpc_calls:
+      - name: "Get"
+        method: "GET"
+        endpoint: "/syslog/settings/get"
+        result_type: "SettingsMonad"
+      - name: "Update"
+        method: "POST"
+        endpoint: "/syslog/settings/set"
+        params:
+          - name: "syslog"
+            optional: false
+            bodyParameter: true
+            customType: "Settings"
+        result_type: "SettingsResult"
+      - name: "Reconfigure"
+        method: "POST"
+        endpoint: "/syslog/service/reconfigure"
+        result_type: "SettingsActionResult"
