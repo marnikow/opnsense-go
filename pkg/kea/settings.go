@@ -16,12 +16,16 @@ type ActionResult struct {
 }
 
 type DHCPv4General struct {
-	Enabled        string              `json:"enabled"`
-	ManualConfig   string              `json:"manual_config"`
-	Interfaces     api.SelectedMapList `json:"interfaces"`
-	ValidLifetime  string              `json:"valid_lifetime"`
-	FWRules        string              `json:"fwrules"`
-	DHCPSocketType api.SelectedMap     `json:"dhcp_socket_type"`
+	Enabled                     string              `json:"enabled"`
+	ManualConfig                string              `json:"manual_config"`
+	Interfaces                  api.SelectedMapList `json:"interfaces"`
+	ServiceSocketsMaxRetries    string              `json:"service_sockets_max_retries"`
+	ServiceSocketsRetryWaitTime string              `json:"service_sockets_retry_wait_time"`
+	ValidLifetime               string              `json:"valid_lifetime"`
+	DeclineProbationPeriod      string              `json:"decline_probation_period"`
+	FWRules                     string              `json:"fwrules"`
+	DHCPSocketType              api.SelectedMap     `json:"dhcp_socket_type"`
+	Compatibility               api.SelectedMapList `json:"compatibility"`
 }
 
 type DHCPv4Monad struct {
@@ -36,11 +40,15 @@ type DHCPv4Settings struct {
 }
 
 type DHCPv6General struct {
-	Enabled       string              `json:"enabled"`
-	ManualConfig  string              `json:"manual_config"`
-	Interfaces    api.SelectedMapList `json:"interfaces"`
-	ValidLifetime string              `json:"valid_lifetime"`
-	FWRules       string              `json:"fwrules"`
+	Enabled                     string              `json:"enabled"`
+	ManualConfig                string              `json:"manual_config"`
+	Interfaces                  api.SelectedMapList `json:"interfaces"`
+	ServiceSocketsMaxRetries    string              `json:"service_sockets_max_retries"`
+	ServiceSocketsRetryWaitTime string              `json:"service_sockets_retry_wait_time"`
+	ValidLifetime               string              `json:"valid_lifetime"`
+	DeclineProbationPeriod      string              `json:"decline_probation_period"`
+	MacSources                  api.SelectedMapList `json:"mac_sources"`
+	FWRules                     string              `json:"fwrules"`
 }
 
 type DHCPv6Monad struct {

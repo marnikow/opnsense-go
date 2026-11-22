@@ -279,15 +279,27 @@ rpc:
         - name: Interfaces
           type: SelectedMapList
           key: interfaces
+        - name: ServiceSocketsMaxRetries
+          type: string
+          key: service_sockets_max_retries
+        - name: ServiceSocketsRetryWaitTime
+          type: string
+          key: service_sockets_retry_wait_time
         - name: ValidLifetime
           type: string
           key: valid_lifetime
+        - name: DeclineProbationPeriod
+          type: string
+          key: decline_probation_period
         - name: FWRules
           type: string
           key: fwrules
         - name: DHCPSocketType
           type: SelectedMap
           key: dhcp_socket_type
+        - name: Compatibility
+          type: SelectedMapList
+          key: compatibility
       DHCPv6Monad:
         - name: DHCPv6
           type: DHCPv6Settings
@@ -315,9 +327,21 @@ rpc:
         - name: Interfaces
           type: SelectedMapList
           key: interfaces
+        - name: ServiceSocketsMaxRetries
+          type: string
+          key: service_sockets_max_retries
+        - name: ServiceSocketsRetryWaitTime
+          type: string
+          key: service_sockets_retry_wait_time
         - name: ValidLifetime
           type: string
           key: valid_lifetime
+        - name: DeclineProbationPeriod
+          type: string
+          key: decline_probation_period
+        - name: MacSources
+          type: SelectedMapList
+          key: mac_sources
         - name: FWRules
           type: string
           key: fwrules
