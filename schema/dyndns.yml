@@ -70,6 +70,52 @@ resources:
         key: current_mtime
 
 rpc:
+  # General settings (DynDNS.xml general). get only returns the general section.
+  - name: Settings
+    filename: settings
+    customTypes:
+      SettingsMonad:
+        - name: Ddclient
+          type: Settings
+          key: ddclient
+      Settings:
+        - name: General
+          type: General
+          key: general
+      General:
+        - name: Enabled
+          type: string
+          key: enabled
+        - name: Verbose
+          type: string
+          key: verbose
+        - name: AllowIpv6
+          type: string
+          key: allowipv6
+        - name: DaemonDelay
+          type: string
+          key: daemon_delay
+        - name: Backend
+          type: SelectedMap
+          key: backend
+      SettingsResult:
+        - name: Result
+          type: string
+          key: result
+    rpc_calls:
+      - name: Get
+        method: GET
+        endpoint: /dyndns/settings/get
+        result_type: SettingsMonad
+      - name: Update
+        method: POST
+        endpoint: /dyndns/settings/set
+        params:
+          - name: ddclient
+            optional: false
+            bodyParameter: true
+            customType: Settings
+        result_type: SettingsResult
   - name: Service
     filename: service
     rpc_calls:
