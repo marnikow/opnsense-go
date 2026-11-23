@@ -34,7 +34,7 @@ type SubnetV6 struct {
 	OptionData                 OptionDataV6        `json:"option_data"`
 	DynamicPrefix              string              `json:"dynamic_prefix"`
 	OptionDataAutoCollect      string              `json:"option_data_autocollect"`
-	SubnetId                   string              `json:"subnet_id"`
+	SubnetId                   string              `json:"subnet_id,omitempty"`
 	ValidLifetime              string              `json:"valid_lifetime"`
 	Option                     api.SelectedMapList `json:"option"`
 	DdnsForwardZone            string              `json:"ddns_forward_zone"`

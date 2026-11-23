@@ -60,7 +60,7 @@ type SubnetV4 struct {
 	MatchCode                  api.SelectedMap     `json:"match_code"`
 	MatchEncoding              api.SelectedMap     `json:"match_encoding"`
 	MatchData                  string              `json:"match_data"`
-	SubnetId                   string              `json:"subnet_id"`
+	SubnetId                   string              `json:"subnet_id,omitempty"`
 	ValidLifetime              string              `json:"valid_lifetime"`
 	Description                string              `json:"description"`
 }
