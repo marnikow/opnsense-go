@@ -41,6 +41,8 @@ func TestGeneral(t *testing.T) {
 		DNS_NoIdent: "1",
 		DHCPSettings: GeneralDHCPSettings{
 			FQDN:                  "1",
+			LocalDomain:           "1",
+			HostPing:              "1",
 			RegisterFirewallRules: "1",
 			DisableHASync:         "1", // New setting to set without breaking anything
 		},
@@ -70,6 +72,8 @@ func TestGeneral(t *testing.T) {
 		DNS_NoIdent: "1",
 		DHCPSettings: GeneralDHCPSettings{
 			FQDN:                  "1",
+			LocalDomain:           "1",
+			HostPing:              "1",
 			RegisterFirewallRules: "1",
 			DisableHASync:         "0", // New setting to set without breaking anything
 		},

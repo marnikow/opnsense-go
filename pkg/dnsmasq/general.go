@@ -15,12 +15,16 @@ type GeneralDHCPSettings struct {
 	InterfaceNoDhcp       api.SelectedMapList `json:"no_interface"`
 	FQDN                  string              `json:"fqdn"`
 	DefaultDomain         string              `json:"domain"`
+	LocalDomain           string              `json:"local"`
 	MaxLeases             string              `json:"lease_max"`
 	Authoritative         string              `json:"authoritative"`
 	ReplyDelay            string              `json:"reply_delay"`
 	RegisterFirewallRules string              `json:"default_fw_rules"`
 	RouterAdvertisements  string              `json:"enable_ra"`
 	DisableHASync         string              `json:"nosync"`
+	HostPing              string              `json:"host_ping"`
+	LogDhcp               string              `json:"log_dhcp"`
+	LogQuiet              string              `json:"log_quiet"`
 }
 
 type GeneralSettings struct {
@@ -30,6 +34,7 @@ type GeneralSettings struct {
 	DNS_Port                                string              `json:"port"`
 	DNS_DNSSEC                              string              `json:"dnssec"`
 	DNS_NoHostLookup                        string              `json:"no_hosts"`
+	DNS_ExpandHosts                         string              `json:"expand_hosts"`
 	DNS_LogDnsQueries                       string              `json:"log_queries"`
 	DNS_MaxConcurrentQueries                string              `json:"dns_forward_max"`
 	DNS_CacheSize                           string              `json:"cache_size"`
