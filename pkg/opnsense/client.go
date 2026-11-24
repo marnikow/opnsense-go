@@ -16,6 +16,7 @@ import (
 	"github.com/browningluke/opnsense-go/pkg/interfaces"
 	"github.com/browningluke/opnsense-go/pkg/ipsec"
 	"github.com/browningluke/opnsense-go/pkg/kea"
+	"github.com/browningluke/opnsense-go/pkg/mdnsrepeater"
 	"github.com/browningluke/opnsense-go/pkg/monit"
 	"github.com/browningluke/opnsense-go/pkg/openvpn"
 	"github.com/browningluke/opnsense-go/pkg/quagga"
@@ -41,6 +42,7 @@ type Client interface {
 	Interfaces() *interfaces.Controller
 	Ipsec() *ipsec.Controller
 	Kea() *kea.Controller
+	Mdnsrepeater() *mdnsrepeater.Controller
 	Monit() *monit.Controller
 	Openvpn() *openvpn.Controller
 	Quagga() *quagga.Controller
@@ -107,6 +109,10 @@ func (c *client) Ipsec() *ipsec.Controller {
 
 func (c *client) Kea() *kea.Controller {
 	return &kea.Controller{Api: c.a}
+}
+
+func (c *client) Mdnsrepeater() *mdnsrepeater.Controller {
+	return &mdnsrepeater.Controller{Api: c.a}
 }
 
 func (c *client) Monit() *monit.Controller {

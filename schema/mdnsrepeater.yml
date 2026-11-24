@@ -1,0 +1,50 @@
+---
+# os-mdns-repeater plugin (model OPNsense/MDNSRepeater), /api/mdnsrepeater/*
+name: mdnsrepeater
+rpc:
+  - name: "Settings"
+    filename: settings
+    customTypes:
+      SettingsMonad:
+        - name: Mdnsrepeater
+          type: Settings
+          key: mdnsrepeater
+      Settings:
+        - name: Enabled
+          type: string
+          key: enabled
+        - name: EnableCarp
+          type: string
+          key: enablecarp
+        - name: Interfaces
+          type: SelectedMapList
+          key: interfaces
+        - name: Blocklist
+          type: SelectedMapList
+          key: blocklist
+      SettingsResult:
+        - name: Result
+          type: string
+          key: result
+      SettingsActionResult:
+        - name: Status
+          type: string
+          key: status
+    rpc_calls:
+      - name: "Get"
+        method: "GET"
+        endpoint: "/mdnsrepeater/settings/get"
+        result_type: "SettingsMonad"
+      - name: "Update"
+        method: "POST"
+        endpoint: "/mdnsrepeater/settings/set"
+        params:
+          - name: "mdnsrepeater"
+            optional: false
+            bodyParameter: true
+            customType: "Settings"
+        result_type: "SettingsResult"
+      - name: "Reconfigure"
+        method: "POST"
+        endpoint: "/mdnsrepeater/service/reconfigure"
+        result_type: "SettingsActionResult"
