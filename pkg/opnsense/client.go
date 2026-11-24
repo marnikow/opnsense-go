@@ -20,6 +20,7 @@ import (
 	"github.com/browningluke/opnsense-go/pkg/monit"
 	"github.com/browningluke/opnsense-go/pkg/openvpn"
 	"github.com/browningluke/opnsense-go/pkg/quagga"
+	"github.com/browningluke/opnsense-go/pkg/radvd"
 	"github.com/browningluke/opnsense-go/pkg/routes"
 	"github.com/browningluke/opnsense-go/pkg/routing"
 	"github.com/browningluke/opnsense-go/pkg/syslog"
@@ -46,6 +47,7 @@ type Client interface {
 	Monit() *monit.Controller
 	Openvpn() *openvpn.Controller
 	Quagga() *quagga.Controller
+	Radvd() *radvd.Controller
 	Routes() *routes.Controller
 	Routing() *routing.Controller
 	Syslog() *syslog.Controller
@@ -125,6 +127,10 @@ func (c *client) Openvpn() *openvpn.Controller {
 
 func (c *client) Quagga() *quagga.Controller {
 	return &quagga.Controller{Api: c.a}
+}
+
+func (c *client) Radvd() *radvd.Controller {
+	return &radvd.Controller{Api: c.a}
 }
 
 func (c *client) Routes() *routes.Controller {

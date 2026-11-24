@@ -1,0 +1,132 @@
+# Router advertisements (core model OPNsense/Radvd, Services > Router Advertisements),
+# /api/radvd/*. One entry per interface; interface is unique.
+name: radvd
+filename: radvd
+reconfigureEndpoint: "/radvd/service/reconfigure"
+resources:
+  - name: Entry
+    filename: entry
+    monad: entries
+    endpoints:
+      add: "/radvd/settings/add_entry"
+      get: "/radvd/settings/get_entry"
+      update: "/radvd/settings/set_entry"
+      delete: "/radvd/settings/del_entry"
+    attrs:
+      - name: Enabled
+        type: string
+        key: enabled
+      - name: Interface
+        type: SelectedMap
+        key: interface
+      - name: Constructor
+        type: SelectedMap
+        key: Base6Interface
+      - name: Mode
+        type: SelectedMap
+        key: mode
+      - name: DeprecatePrefix
+        type: SelectedMap
+        key: DeprecatePrefix
+      - name: RemoveAdvOnExit
+        type: SelectedMap
+        key: RemoveAdvOnExit
+      - name: RemoveRoute
+        type: SelectedMap
+        key: RemoveRoute
+      - name: Routes
+        type: SelectedMapList
+        key: routes
+      - name: RDNSS
+        type: SelectedMapList
+        key: RDNSS
+      - name: DNSSL
+        type: SelectedMapList
+        key: DNSSL
+      - name: DNS
+        type: string
+        key: dns
+      - name: MinInterval
+        type: string
+        key: MinRtrAdvInterval
+      - name: MaxInterval
+        type: string
+        key: MaxRtrAdvInterval
+      - name: DNSSLLifetime
+        type: string
+        key: AdvDNSSLLifetime
+      - name: DefaultLifetime
+        type: string
+        key: AdvDefaultLifetime
+      - name: LinkMTU
+        type: string
+        key: AdvLinkMTU
+      - name: PreferredLifetime
+        type: string
+        key: AdvPreferredLifetime
+      - name: SourceAddress
+        type: string
+        key: AdvRASrcAddress
+      - name: RDNSSLifetime
+        type: string
+        key: AdvRDNSSLifetime
+      - name: RouteLifetime
+        type: string
+        key: AdvRouteLifetime
+      - name: ValidLifetime
+        type: string
+        key: AdvValidLifetime
+      - name: Priority
+        type: SelectedMap
+        key: AdvDefaultPreference
+      - name: Nat64Prefix
+        type: string
+        key: nat64prefix
+      # 26.7+
+      - name: Nat64PrefixLifetime
+        type: string
+        key: nat64prefixLifetime
+      # 26.7+
+      - name: HopLimit
+        type: string
+        key: AdvCurHopLimit
+
+rpc:
+  - name: Search
+    filename: search
+    rpc_calls:
+      - name: Entry
+        endpoint: /radvd/settings/search_entry
+        method: POST
+        params:
+          - name: rowCount
+            optional: false
+            bodyParameter: true
+        result_type: SearchEntryResponse
+    customTypes:
+      SearchEntryItem:
+        - name: Id
+          type: string
+          key: uuid
+        - name: Enabled
+          type: string
+          key: enabled
+        - name: Interface
+          type: string
+          key: interface
+        - name: Mode
+          type: string
+          key: mode
+      SearchEntryResponse:
+        - name: Current
+          type: int
+          key: current
+        - name: RowCount
+          type: int
+          key: rowCount
+        - name: Total
+          type: int
+          key: total
+        - name: Rows
+          type: "[]SearchEntryItem"
+          key: rows
